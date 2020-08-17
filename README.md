@@ -42,6 +42,7 @@ Insert final all by all propogator script
 ```
 
 After running the first 4 modules, output is reshaped for R processing
+
 5. Add header to each of the canonical transcript file so the list can be used as query list 
 ```
 sed -i '1 i\Query_gene' *_canonical_transcript.txt 
