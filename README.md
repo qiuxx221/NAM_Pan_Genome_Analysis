@@ -16,17 +16,18 @@ split_merge pipeline: https://github.com/HirschLabUMN/Split_genes/tree/master/Sp
 ncbi_blast: ncbi_blast+/2.8.1
 ```
 
+Note:
+```
+Genes used for this pan genome analysis are genes annoated on chromsome, scaffold genes are not included. 
+```
+
 Pan-genome construction:
 1. Identify syntenic block using nucmer 
-  Extract canonical sequence ID from the gff file 
+  Extract canonical sequence ID that are on chromsomes from the gff file 
 ```
 for i in *.gff; do
-  grep "canonical_transcript" "$i" | cut -f 9 | tr ";" "\n" | grep "transcript_id" | sed 's/transcript_id=//g' > $(basename "$i")canonical_transcript.txt
+  grep "canonical_transcript" "$i" | grep -v scaf |cut -f 9 | tr ";" "\n" | grep "transcript_id" | sed 's/transcript_id=//g' > "$i"_canonical_transcript.txt
 done  
-```
-  running nucmer 
-```
-Insert the final proprogator script 
 ```
 2. Pulling canonical transcript gene gff file, below is one example 
 ```
@@ -36,10 +37,30 @@ perl pull_out_caononical_transcript_coded_from_gff.pl -i ~/nam_pan_genome/NAM_an
 ```
 makeblastdb -in zea_maysb73_core_3_87_1.canonical.cds.fasta -out B73_cds_db -dbtype nucl
 ```
-4. Set up all by all blast to search pan gene 
+4. running nucmer at -c 1000, example of the script is shown below. All pairs are generated using mummer_c1000_propogator.sh 
 ```
-Insert final all by all propogator script 
+nucmer --mum -c 1000 -p HP301_B73_c1000 /panfs/roc/groups/6/maize/shared/databases/genomes/Zea_mays/HP301_NAMassembly/Zm-HP301-REFERENCE-NAM-1.0/Zm-HP301-REFERENCE-NAM-1.0.fasta /panfs/roc/groups/6/maize/shared/databases/genomes/Zea_mays/B73_NAMassembly/Zm-B73-REFERENCE-NAM-5.0/Zm-B73-REFERENCE-NAM-5.0.fasta
 ```
+nucmer output was further processed using nucmer_post_processing.sh
+and filtered that the syntenic block must be on the same chr
+```
+for j in *.coords ; do
+  grep -v scaf "$j"  | awk '(NR>1) && ($12 == $13 )' > "$j"_filter_chr_nucmer 
+done 
+```
+
+5. Set up all by all blast to search pan gene using script all_by_all_blast_batch.sh. Below is an example of the script
+```
+python3 All_by_All_Blast_COedits_10.py -q /home/hirschc1/qiuxx221/nam_pan_genome/NAM_annotation/canonical_gff/B73_canonical.gff -s /home/hirschc1/qiuxx221/nam_pan_genome/NAM_annotation/canonical_gff/P39_canonical.gff -b /home/hirschc1/qiuxx221/nam_pan_genome/NAM_annotation/canonical_fasta/P39_cds_db -l /home/hirschc1/qiuxx221/nam_pan_genome/NAM_annotation/canonical_fasta/zea_maysb73_core_3_87_1.canonical.cds.fasta -o /home/hirschc1/qiuxx221/nam_pan_genome/all_by_all_1000_new_annotation_10_filter_nucmer/B73_P39_AllbyAll_res.txt -n /home/hirschc1/qiuxx221/nucmer_1000_filter/B73_P39_c1000.fil.coords -g ab
+```
+
+
+
+
+
+
+
+
 
 After running the first 4 modules, output is reshaped for R processing
 
