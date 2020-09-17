@@ -53,28 +53,32 @@ done
 ```
 python3 All_by_All_Blast_COedits_10.py -q /home/hirschc1/qiuxx221/nam_pan_genome/NAM_annotation/canonical_gff/B73_canonical.gff -s /home/hirschc1/qiuxx221/nam_pan_genome/NAM_annotation/canonical_gff/P39_canonical.gff -b /home/hirschc1/qiuxx221/nam_pan_genome/NAM_annotation/canonical_fasta/P39_cds_db -l /home/hirschc1/qiuxx221/nam_pan_genome/NAM_annotation/canonical_fasta/zea_maysb73_core_3_87_1.canonical.cds.fasta -o /home/hirschc1/qiuxx221/nam_pan_genome/all_by_all_1000_new_annotation_10_filter_nucmer/B73_P39_AllbyAll_res.txt -n /home/hirschc1/qiuxx221/nucmer_1000_filter/B73_P39_c1000.fil.coords -g ab
 ```
-
-
-
-
-
-
-
-
-
 After running the first 4 modules, output is reshaped for R processing
 
-5. Add header to each of the canonical transcript file so the list can be used as query list 
+6. Add header to each of the canonical transcript file so the list can be used as query list 
 ```
 sed -i '1 i\Query_gene' *_canonical_transcript.txt 
 ```
-6. Duplicate the canonical transcript ID so it can be used for left_join in R
+7. Duplicate the canonical transcript ID so it can be used for left_join in R
 ```
 for i in *.txt; do
   id=$(echo "$i" | cut -d'_' -f1)
-  paste -d '\t' "$i" "$i"| sed "1iQuery_gene\t$id" > $(basename "$i")_add.txt
+  paste -d '\t' "$i" "$i"| sed "1iQuery_gene\t$id" >  "$i"_add.txt
 done 
-rename _canonical_transcript.txt_input.txt_add '' *.txt
+```
+
+8. processing all_by_all_blast output 
+```
+```
+
+9. input all output from step 6,7,8 into R to make the base matrix using R script: make_base_pan_matrix.R
+```
+This step input all pairs information and align into a single matrix. gene without pairs is recored as NA 
+```
+
+10. compressing the base matrix by merging ID that present more than once within a column using R script: compressing_duplicate_ID.R
+```
+Gene pairs will be picked up by all by all blast files in both directions (B73_B97 vs B97_B73). gene ID has the chance to present more than once. This step joins all gene ID, tandem dulicates will be separated by ";"
 ```
 
 
