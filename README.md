@@ -145,7 +145,7 @@ pan_gene_ID NAM gmap_ID= genome coordinate
 # a master gff file was made for all NAM annotation
 
 module load bedtools 
-intersectBed -a -b -wa -wb > intersect_master.gff
+intersectBed -a gmap_cutoff_90.gff -b /home/hirschc1/qiuxx221/nam_pan_genome/NAM_annotation/canonical_gff/master_gff_for_intersect.gff -wa -wb > intersect_master_90.gff 
 ```
 
 14. the intersected gff files was further filtered using script intersect_gene_model_name_changing.py
