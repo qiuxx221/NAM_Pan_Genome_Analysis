@@ -379,9 +379,9 @@ for QueryGene in Query_gff_file:
                 stop = int(result[3])
                 if chrom == Syn_region_chrom:
                     if ((Syn_region_start)-500000) <= start <= \
-                       ((Syn_region_start) + 500000) or \
+                       ((Syn_region_stop) + 500000) and \
                        ((Syn_region_start)-500000) <= stop <= \
-                       ((Syn_region_start) + 500000):
+                       ((Syn_region_stop) + 500000):
                         Syn_genes.append(result)
             Syn_genes.sort(key=lambda x: x[0])
 
