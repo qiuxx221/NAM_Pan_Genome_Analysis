@@ -1,4 +1,4 @@
-fill_info <- read.csv("final_list_for_merge.txt",sep = "\t",header=FALSE)
+fill_info <- read.csv("final_list_for_merge_90.txt",sep = "\t",header=FALSE)
 colnames(fill_info) <- c("Query_gene","NAM_genome","Gmap_coordinate")
 
 #reshape the dataset 
