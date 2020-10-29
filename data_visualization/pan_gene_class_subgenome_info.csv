@@ -1,0 +1,79 @@
+count,NA_count,pan_gene_type,subgenome,genome_presence
+250,25,Private Gene,M1,1
+64,25,Private Gene,M2,1
+20000,25,Private Gene,Non Syntenic,1
+141,24,Dispensible Gene,M1,2
+37,24,Dispensible Gene,M2,2
+10299,24,Dispensible Gene,Non Syntenic,2
+12,23,Dispensible Gene,M1,3
+27,23,Dispensible Gene,M2,3
+6321,23,Dispensible Gene,Non Syntenic,3
+77,22,Dispensible Gene,M1,4
+20,22,Dispensible Gene,M2,4
+4966,22,Dispensible Gene,Non Syntenic,4
+18,21,Dispensible Gene,M1,5
+17,21,Dispensible Gene,M2,5
+3646,21,Dispensible Gene,Non Syntenic,5
+8,20,Dispensible Gene,M1,6
+24,20,Dispensible Gene,M2,6
+2891,20,Dispensible Gene,Non Syntenic,6
+13,19,Dispensible Gene,M1,7
+15,19,Dispensible Gene,M2,7
+2582,19,Dispensible Gene,Non Syntenic,7
+10,18,Dispensible Gene,M1,8
+12,18,Dispensible Gene,M2,8
+2131,18,Dispensible Gene,Non Syntenic,8
+14,17,Dispensible Gene,M1,9
+11,17,Dispensible Gene,M2,9
+1833,17,Dispensible Gene,Non Syntenic,9
+8,16,Dispensible Gene,M1,10
+14,16,Dispensible Gene,M2,10
+1619,16,Dispensible Gene,Non Syntenic,10
+13,15,Dispensible Gene,M1,11
+19,15,Dispensible Gene,M2,11
+1433,15,Dispensible Gene,Non Syntenic,11
+7,14,Dispensible Gene,M1,12
+10,14,Dispensible Gene,M2,12
+1309,14,Dispensible Gene,Non Syntenic,12
+8,13,Dispensible Gene,M1,13
+13,13,Dispensible Gene,M2,13
+1239,13,Dispensible Gene,Non Syntenic,13
+15,12,Dispensible Gene,M1,14
+4,12,Dispensible Gene,M2,14
+1127,12,Dispensible Gene,Non Syntenic,14
+20,11,Dispensible Gene,M1,15
+20,11,Dispensible Gene,M2,15
+1032,11,Dispensible Gene,Non Syntenic,15
+16,10,Dispensible Gene,M1,16
+8,10,Dispensible Gene,M2,16
+911,10,Dispensible Gene,Non Syntenic,16
+10,9,Dispensible Gene,M1,17
+13,9,Dispensible Gene,M2,17
+931,9,Dispensible Gene,Non Syntenic,17
+20,8,Dispensible Gene,M1,18
+13,8,Dispensible Gene,M2,18
+817,8,Dispensible Gene,Non Syntenic,18
+19,7,Dispensible Gene,M1,19
+17,7,Dispensible Gene,M2,19
+883,7,Dispensible Gene,Non Syntenic,19
+14,6,Dispensible Gene,M1,20
+12,6,Dispensible Gene,M2,20
+883,6,Dispensible Gene,Non Syntenic,20
+21,5,Dispensible Gene,M1,21
+10,5,Dispensible Gene,M2,21
+856,5,Dispensible Gene,Non Syntenic,21
+77,4,Dispensible Gene,M1,22
+39,4,Dispensible Gene,M2,22
+831,4,Dispensible Gene,Non Syntenic,22
+41,3,Dispensible Gene,M1,23
+36,3,Dispensible Gene,M2,23
+868,3,Dispensible Gene,Non Syntenic,23
+174,2,Soft Gene,M1,24
+66,2,Soft Gene,M2,24
+1066,2,Soft Gene,Non Syntenic,24
+741,1,Soft Gene,M1,25
+240,1,Soft Gene,M2,25
+1822,1,Soft Gene,Non Syntenic,25
+10414,0,Core Gene,M1,26
+6834,0,Core Gene,M2,26
+10608,0,Core Gene,Non Syntenic,26
