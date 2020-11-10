@@ -82,14 +82,14 @@ sequence <- seq(from =1, to =102660, by =1)
 # create dataframe so tidyr can transform the dataset for heatmap 
 heatmap_dataset <- cbind(sequence,sort_pav[1:26])
 # reshape the dataframe and order column by genome 
-heatmap_dataset_for_plot <- subset(heatmap_dataset, select = c("sequence", "Tzi8", "NC358", "NC350","Ki11","Ki3","CML333", "CML322","CML277", "CML247", "CML228","CML103","CML69","CML52","P39","Il14H","HP301","Tx303","Mo18W","M37W","Oh43","Oh7B","Ms71","M162W","Ky21","B97","B73"))
+heatmap_dataset_for_plot <- subset(heatmap_dataset, select = c("sequence", "Tzi8", "NC358", "NC350","Ki11","Ki3","CML333", "CML322","CML277", "CML247", "CML228","CML103","CML69","CML52","Il14H","P39","HP301","Tx303","Mo18W","M37W","Oh7B","Oh43","Ms71","M162W","Ky21","B97","B73"))
 
 transform_hp <- melt(heatmap_dataset_for_plot, id.var = 'sequence')
 pdf("pav_heatmap.pdf", width=6,height=6,pointsize=12)
 
 color_fill <- c("#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#FF4500","#FF4500","#DA70D6","#787878","#787878","#787878","#4169E1","#4169E1","#4169E1","#4169E1","#4169E1","#4169E1","#FFC125")
 PAV_heatmap <- ggplot(transform_hp, aes(sequence, variable)) + geom_tile(aes(fill = value)) + 
-  scale_fill_manual(name="Pan genes (n=102660) presence or absence",values=c("#316879","#ff9a8d"))  + theme_classic() + theme(axis.title.x=element_blank(),
+  scale_fill_manual(name="Pan Genes (n=102660) Presence or Absence",values=c("#316879","#ff9a8d"))  + theme_classic() + theme(axis.title.x=element_blank(),
                                                                        axis.text.x=element_blank(),
                                                                        axis.ticks.x=element_blank()) +
   theme(axis.title.y=element_blank(),
@@ -100,5 +100,4 @@ PAV_heatmap <- ggplot(transform_hp, aes(sequence, variable)) + geom_tile(aes(fil
 
 PAV_heatmap + theme(text = element_text(size = 12)) 
 dev.off()
-
 
