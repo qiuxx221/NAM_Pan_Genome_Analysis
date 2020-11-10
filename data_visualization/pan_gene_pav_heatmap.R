@@ -40,7 +40,7 @@ plot_gene_type <- read.csv("summary_gene_type_fmt.csv")
 reshaped_datafram <- pivot_wider(plot_gene_type, names_from = NAM, values_from = Gene_Count)
 
 #plot_type_fmt <- read.csv("reshaped_gene_type_fmt.csv",header = TRUE)
-plot_type_dataset_for_plot <- subset(reshaped_datafram, select = c(Gene_Type,B73,B97,Ky21,M162W,Ms71,Oh7B,Oh43,M37W,Mo18W,Tx303,HP301,Il14H,P39,CML52,CML69,CML103,CML228,CML247,CML277,CML322,CML333,Ki3,Ki11,NC350,NC358,Tzi8))
+plot_type_dataset_for_plot <- subset(reshaped_datafram, select = c(Gene_Type,B73,B97,Ky21,M162W,Ms71,Oh43,Oh7B,M37W,Mo18W,Tx303,HP301,P39,Il14H,CML52,CML69,CML103,CML228,CML247,CML277,CML322,CML333,Ki3,Ki11,NC350,NC358,Tzi8))
 
 # convert matrix back to three columns for stacked plot 
 library(reshape2)
@@ -48,15 +48,15 @@ plot_type_dataset_for_plot_reshape <- setNames(melt(plot_type_dataset_for_plot),
 color_fill <- c("#FFC125","#4169E1","#4169E1","#4169E1","#4169E1","#4169E1","#4169E1","#787878","#787878","#787878","#DA70D6","#FF4500","#FF4500","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32","#32CD32")
 levels(factor(plot_type_dataset_for_plot_reshape$Gene_Type))
 
-gene_composition <- ggplot(plot_type_dataset_for_plot_reshape, aes(y=Gene_Count, x=factor(NAM), fill=factor(Gene_Type,levels=c("Core Gene       ","Softcore Gene       ", "Dispensible Gene","Private Gene    " )))) +
+gene_composition <- ggplot(plot_type_dataset_for_plot_reshape, aes(y=Gene_Count, x=factor(NAM), fill=factor(Gene_Type,levels=c("Core Gene       ","Softcore Gene       ", "Dispensable Gene","Private Gene    " )))) +
   geom_bar(position = "fill", stat = "identity") +
   #geom_text(aes(label = Gene_Count), position = position_fill(vjust = 0.5)) +
   ylab("Percentage of Genes in the Pan Genome") +
   #scale_fill_npg(name="Pan Gene Type") + 
-  scale_fill_manual(values = c("#DC0000FF","#3C5488FF","#4DBBD5FF","#00A087FF")) +
+  scale_fill_manual(values = c("#DC0000FF","#3C5488FF","#4DBBD5FF","#00A087FF"),labels = c("Core Gene", "Near-Core Gene", "Dispensable Gene","Private Gene")) +
   scale_y_continuous(labels = scales::percent_format()) +
   xlab("NAM Genomes") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-                              panel.background = element_blank(), axis.line = element_line(colour = "black"),axis.text.x = element_text(angle = 45, hjust = 1, colour = color_fill),legend.title = element_blank()) + theme(legend.position="right") 
+                              panel.background = element_blank(), axis.line = element_line(colour = "black"),axis.text.x = element_text(angle = 45, hjust = 1, colour = color_fill),legend.title = element_blank()) + theme(legend.position="bottom") 
  
 
 gene_composition + theme(text = element_text(size = 12))
