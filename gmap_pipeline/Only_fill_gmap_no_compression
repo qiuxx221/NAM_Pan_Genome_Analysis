@@ -1,0 +1,77 @@
+# preparing pan gene matrix for each genome 
+grep eb pan_gene_id_all.txt > B73_pan_gene_id.txt
+grep 42ab pan_gene_id_all.txt > Tzi8_pan_gene_id.txt
+grep 31ab pan_gene_id_all.txt > Ky21_pan_gene_id.txt
+grep 33ab pan_gene_id_all.txt > M162W_pan_gene_id.txt
+grep 35ab pan_gene_id_all.txt > Ms71_pan_gene_id.txt
+
+
+grep 38ab pan_gene_id_all.txt > Oh7B_pan_gene_id.txt
+grep 39ab pan_gene_id_all.txt > Oh43_pan_gene_id.txt
+grep 32ab pan_gene_id_all.txt > M37W_pan_gene_id.txt
+grep 34ab pan_gene_id_all.txt > Mo18W_pan_gene_id.txt
+grep 36ab pan_gene_id_all.txt > NC350_pan_gene_id.txt
+
+grep 27ab pan_gene_id_all.txt > HP301_pan_gene_id.txt
+grep 28ab pan_gene_id_all.txt > Il14H_pan_gene_id.txt
+grep 40ab pan_gene_id_all.txt > P39_pan_gene_id.txt
+grep 19ab pan_gene_id_all.txt > CML52_pan_gene_id.txt
+grep 20ab pan_gene_id_all.txt > CML69_pan_gene_id.txt
+
+grep 30ab pan_gene_id_all.txt > Ki11_pan_gene_id.txt
+grep 22ab pan_gene_id_all.txt > CML228_pan_gene_id.txt
+grep 23ab pan_gene_id_all.txt > CML247_pan_gene_id.txt
+grep 24ab pan_gene_id_all.txt > CML277_pan_gene_id.txt
+grep 25ab pan_gene_id_all.txt > CML322_pan_gene_id.txt
+
+
+grep 26ab pan_gene_id_all.txt > CML333_pan_gene_id.txt
+grep 29ab pan_gene_id_all.txt > Ki3_pan_gene_id.txt
+grep 21ab pan_gene_id_all.txt > CML103_pan_gene_id.txt
+grep 41ab pan_gene_id_all.txt > Tx303_pan_gene_id.txt
+grep 37ab pan_gene_id_all.txt > NC358_pan_gene_id.txt
+
+grep 18ab pan_gene_id_all.txt > B97_pan_gene_id.txt
+
+for i in *_pan_gene_id.txt ; do
+  grep -Fwf "$i" pan26_all.collapsed.csv | sed '1 i\,Query_gene,B73,Tzi8,Ky21,M162W,Ms71,Oh7B,Oh43,M37W,Mo18W,NC350,HP301,Il14H,P39,CML52,CML69,Ki11,CML228,CML247,CML277,CML322,CML333,Ki3,CML103,Tx303,NC358,B97' > "$i"_rep_pan_genes.csv
+done
+
+rename _pan_gene_id.txt '' *rep_pan_genes.csv
+
+perl fill_in_coordinates.pl -G gmap_gff3/ -g B73 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/B73_rep_pan_genes.csv -o B73_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g Tzi8 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/Tzi8_rep_pan_genes.csv -o Tzi8_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g Ky21 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/Ky21_rep_pan_genes.csv -o Ky21_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g M162W -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/M162W_rep_pan_genes.csv -o M162W_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g Ms71 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/Ms71_rep_pan_genes.csv -o Ms71_matrix_with_NAs_filled.txt
+
+
+perl fill_in_coordinates.pl -G gmap_gff3/ -g Oh7B -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/Oh7B_rep_pan_genes.csv -o Oh7B_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g Oh43 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/Oh43_rep_pan_genes.csv -o Oh43_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g M37W -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/M37W_rep_pan_genes.csv -o M37W_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g Mo18W -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/Mo18W_rep_pan_genes.csv -o Mo18W_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g NC350 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/NC350_rep_pan_genes.csv -o NC350_matrix_with_NAs_filled.txt
+
+perl fill_in_coordinates.pl -G gmap_gff3/ -g HP301 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/HP301_rep_pan_genes.csv -o HP301_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g Il14H -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/Il14H_rep_pan_genes.csv -o Il14H_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g P39 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/P39_rep_pan_genes.csv -o P39_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g CML52 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/CML52_rep_pan_genes.csv -o CML52_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g CML69 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/CML69_rep_pan_genes.csv -o CML69_matrix_with_NAs_filled.txt
+
+perl fill_in_coordinates.pl -G gmap_gff3/ -g Ki11 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/Ki11_rep_pan_genes.csv -o Ki11_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g CML228 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/CML228_rep_pan_genes.csv -o CML228_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g CML247 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/CML247_rep_pan_genes.csv -o CML247_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g CML277 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/CML277_rep_pan_genes.csv -o CML277_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g CML322 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/CML322_rep_pan_genes.csv -o CML322_matrix_with_NAs_filled.txt
+
+perl fill_in_coordinates.pl -G gmap_gff3/ -g CML333 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/CML333_rep_pan_genes.csv -o CML333_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g Ki3 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/Ki3_rep_pan_genes.csv -o Ki3_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g CML103 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/CML103_rep_pan_genes.csv -o CML103_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g Tx303 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/Tx303_rep_pan_genes.csv -o Tx303_matrix_with_NAs_filled.txt
+perl fill_in_coordinates.pl -G gmap_gff3/ -g NC358 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/NC358_rep_pan_genes.csv -o NC358_matrix_with_NAs_filled.txt
+
+perl fill_in_coordinates.pl -G gmap_gff3/ -g B97 -N nucmer1000/ -p pan_gene_dict.csv  -P pan_matrix/B97_rep_pan_genes.csv -o B97_matrix_with_NAs_filled.txt
+
+
+
+
