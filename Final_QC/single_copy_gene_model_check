@@ -1,3 +1,6 @@
+/home/hirschc1/qiuxx221/nam_pan_genome/final_QC/single_copy_check
+
+
 for i in *.txt; do
   seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta "$i" > "$i".fasta
 done
