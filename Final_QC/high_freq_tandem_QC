@@ -1,0 +1,167 @@
+# extract sequence 
+~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta
+
+for i in *.txt; do
+  seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta "$i" > "$i".fasta
+done
+
+
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_54066.txt > pan_gene_54066.txt.fasta
+
+################################################20 and above################################################
+
+## pan_gene_52467
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_52467.txt > pan_gene_52467.txt.fasta
+# get Zm00001eb046280_T001 as rep transcript 
+makeblastdb -in pan_gene_52467_rep.fasta -dbtype nucl 
+blastn -db pan_gene_52467_rep.fasta -query pan_gene_52467.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_52467_blast_out
+sed '/^\s*$/d' pan_gene_52467.txt | wc -l 
+cut -f 1 pan_gene_52467_blast_out | uniq | wc -l 
+
+## pan_gene_54310
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_54310.txt > pan_gene_54310.txt.fasta
+# get Zm00001eb391180_T001 as rep transcript 
+makeblastdb -in pan_gene_54310_rep.fasta -dbtype nucl 
+blastn -db pan_gene_54310_rep.fasta -query pan_gene_54310.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_54310_blast_out
+
+sed '/^\s*$/d' pan_gene_54310.txt | wc -l 
+cut -f 1 pan_gene_54310_blast_out | uniq | wc -l 
+
+## pan_gene_53744
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_53744.txt > pan_gene_53744.txt.fasta
+# get Zm00001eb283660_T001 as rep transcript 
+makeblastdb -in pan_gene_53744_rep.fasta -dbtype nucl 
+blastn -db pan_gene_53744_rep.fasta -query pan_gene_53744.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_53744_blast_out
+sed '/^\s*$/d' pan_gene_53744.txt | wc -l
+
+cut -f 1 pan_gene_53744_blast_out | uniq | wc -l 
+
+## pan_gene_54066
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_54066.txt > pan_gene_54066.txt.fasta
+# get Zm00001eb341460_T001 as rep transcript 
+makeblastdb -in pan_gene_54066_rep.fasta -dbtype nucl 
+blastn -db pan_gene_54066_rep.fasta -query pan_gene_54066.txt.fasta -outfmt 6 -max_target_seqs 1 | wc -l
+sed '/^\s*$/d' pan_gene_54066.txt | wc -l
+blastn -db pan_gene_54066_rep.fasta -query pan_gene_54066.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_54066_blast_out
+sed '/^\s*$/d' pan_gene_54066.txt | wc -l
+
+cut -f 1 pan_gene_54066_blast_out | uniq | wc -l 
+
+## pan_gene_52909
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_52909.txt > pan_gene_52909.txt.fasta
+# get Zm00001eb128750_T001 as rep transcript 
+makeblastdb -in pan_gene_52909_rep.fasta -dbtype nucl 
+blastn -db pan_gene_52909_rep.fasta -query pan_gene_52909.txt.fasta -outfmt 6 -max_target_seqs 1 | wc -l
+sed '/^\s*$/d' pan_gene_52909.txt | wc -l
+blastn -db pan_gene_52909_rep.fasta -query pan_gene_52909.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_52909_blast_out
+cut -f 1 pan_gene_52909_blast_out | uniq | wc -l 
+
+
+## pan_gene_52299
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_52299.txt > pan_gene_52299.txt.fasta
+# get Zm00001eb017660_T001 as rep transcript 
+makeblastdb -in pan_gene_52299_rep.fasta -dbtype nucl 
+blastn -db pan_gene_52299_rep.fasta -query pan_gene_52299.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_52299_blast_out
+sed '/^\s*$/d' pan_gene_52299.txt | wc -l
+cut -f 1 pan_gene_52299_blast_out | uniq | wc -l 
+
+
+## pan_gene_52498
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_52498.txt > pan_gene_52498.txt.fasta
+# get Zm00001eb050700_T001 as rep transcript 
+makeblastdb -in pan_gene_52498_rep.fasta -dbtype nucl 
+blastn -db pan_gene_52498_rep.fasta -query pan_gene_52498.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_52498_blast_out
+sed '/^\s*$/d' pan_gene_52498.txt | wc -l
+cut -f 1 pan_gene_52498_blast_out | uniq | wc -l 
+
+## pan_gene_52615
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_52615.txt > pan_gene_52615.txt.fasta
+# get Zm00001eb070270_T005 as rep transcript 
+makeblastdb -in pan_gene_52615_rep.fasta -dbtype nucl 
+blastn -db pan_gene_52615_rep.fasta -query pan_gene_52615.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_52615_blast_out
+sed '/^\s*$/d' pan_gene_52615.txt | wc -l
+cut -f 1 pan_gene_52615_blast_out | uniq | wc -l 
+
+
+## pan_gene_53942
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_53942.txt > pan_gene_53942.txt.fasta
+# get Zm00001eb317690_T001 as rep transcript 
+makeblastdb -in pan_gene_53942_rep.fasta -dbtype nucl 
+blastn -db pan_gene_53942_rep.fasta -query pan_gene_53942.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_53942_blast_out
+sed '/^\s*$/d' pan_gene_53942.txt | wc -l
+cut -f 1 pan_gene_53942_blast_out | uniq | wc -l 
+
+
+## pan_gene_57904
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_57904.txt > pan_gene_57904.txt.fasta
+# get Zm00029ab245500_T001 as rep transcript 
+makeblastdb -in pan_gene_57904_rep.fasta -dbtype nucl 
+blastn -db pan_gene_57904_rep.fasta -query pan_gene_57904.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_57904_blast_out
+sed '/^\s*$/d' pan_gene_57904.txt | wc -l
+cut -f 1 pan_gene_57904_blast_out | uniq | wc -l 
+
+
+################################################10-20########################################################################
+
+
+## pan_gene_263
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_263.txt > pan_gene_263.txt.fasta
+# get Zm00001eb004990_T003 as rep transcript 
+makeblastdb -in pan_gene_263_rep.fasta -dbtype nucl 
+blastn -db pan_gene_263_rep.fasta -query pan_gene_263.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_263_blast_out
+sed '/^\s*$/d' pan_gene_263.txt | wc -l
+cut -f 1 pan_gene_263_blast_out | uniq | wc -l 
+
+## pan_gene_2266
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_2266.txt > pan_gene_2266.txt.fasta
+# get Zm00001eb043850_T001 as rep transcript 
+makeblastdb -in pan_gene_2266_rep.fasta -dbtype nucl 
+blastn -db pan_gene_2266_rep.fasta -query pan_gene_2266.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_2266_blast_out
+sed '/^\s*$/d' pan_gene_2266.txt | wc -l
+cut -f 1 pan_gene_2266_blast_out | uniq | wc -l 
+
+
+## pan_gene_19130
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_19130.txt > pan_gene_19130.txt.fasta
+# get Zm00001eb381150_T001 as rep transcript 
+makeblastdb -in pan_gene_19130_rep.fasta -dbtype nucl 
+blastn -db pan_gene_19130_rep.fasta -query pan_gene_19130.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_19130_blast_out
+sed '/^\s*$/d' pan_gene_19130.txt | wc -l
+cut -f 1 pan_gene_19130_blast_out | uniq | wc -l 
+
+
+## pan_gene_6636
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_6636.txt > pan_gene_6636.txt.fasta
+# get Zm00001eb131990_T002 as rep transcript 
+makeblastdb -in pan_gene_6636_rep.fasta -dbtype nucl 
+blastn -db pan_gene_6636_rep.fasta -query pan_gene_6636.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_6636_blast_out
+sed '/^\s*$/d' pan_gene_6636.txt | wc -l
+cut -f 1 pan_gene_6636_blast_out | uniq | wc -l 
+
+
+
+
+#100045 
+#samtools faidx Zm-Ms71-REFERENCE-NAM-1.0.fasta chr2:180153271-180157344 > /home/hirschc1/qiuxx221/nam_pan_genome/final_QC/tandem_QC/tandem_10_20/pan_gene_100045_Ms71.fasta
+#samtools faidx Zm-Oh7B-REFERENCE-NAM-1.0.fasta chr2:178671915-178683324 > /home/hirschc1/qiuxx221/nam_pan_genome/final_QC/tandem_QC/tandem_10_20/pan_gene_100045_Oh7B.fasta
+#samtools faidx Zm-CML69-REFERENCE-NAM-1.0.fasta  chr2:177750507-177766519 > /home/hirschc1/qiuxx221/nam_pan_genome/final_QC/tandem_QC/tandem_10_20/pan_gene_100045_CML69.fasta
+
+#samtools faidx Zm-Ki3-REFERENCE-NAM-1.0.fasta chr2:179039940-179044013 > /home/hirschc1/qiuxx221/nam_pan_genome/final_QC/tandem_QC/tandem_10_20/pan_gene_100045_Ki3.fasta
+#samtools faidx Zm-Ki11-REFERENCE-NAM-1.0.fasta chr2:189168016-189172089 > /home/hirschc1/qiuxx221/nam_pan_genome/final_QC/tandem_QC/tandem_10_20/pan_gene_100045_Ki11.fasta
+#samtools faidx Zm-Tx303-REFERENCE-NAM-1.0.fasta chr2:181888999-181900407 > /home/hirschc1/qiuxx221/nam_pan_genome/final_QC/tandem_QC/tandem_10_20/pan_gene_100045_Tx303.fasta
+samtools faidx Zm-NC358-REFERENCE-NAM-1.0.fasta chr2:181244371-181255778 > /home/hirschc1/qiuxx221/nam_pan_genome/final_QC/tandem_QC/tandem_10_20/pan_gene_100045_NC358.fasta
+
+
+pan_gene_100045_1.txt
+
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_100045_1.txt > pan_gene_100045_1.txt.fasta
+# get Zm00042ab100350_T001 as rep transcript 
+makeblastdb -in pan_gene_100045_rep.fasta -dbtype nucl 
+blastn -db pan_gene_100045_rep.fasta -query pan_gene_100045.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_100045_blast_out
+
+cut -f 1 pan_gene_100045_blast_out | uniq | wc -l 
+
+
+
+
+
