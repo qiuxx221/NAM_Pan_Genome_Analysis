@@ -510,3 +510,14 @@ makeblastdb -in pan_gene_12999_rep.fasta -dbtype nucl
 blastn -db pan_gene_12999_rep.fasta -query pan_gene_12999.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_12999_blast_out
 sed '/^\s*$/d' pan_gene_12999.txt | wc -l
 cut -f 1 pan_gene_12999_blast_out | uniq | wc -l 
+
+
+
+# pan_gene_55062
+
+seqtk subseq ~/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta pan_gene_55062.txt > pan_gene_55062.txt.fasta
+# get Zm00042ab317660_T001 as rep transcript 
+makeblastdb -in pan_gene_55062_rep.fasta -dbtype nucl 
+blastn -db pan_gene_55062_rep.fasta -query pan_gene_55062.txt.fasta -outfmt 6 -max_target_seqs 1 > pan_gene_55062_blast_out
+sed '/^\s*$/d' pan_gene_55062.txt | wc -l
+cut -f 1 pan_gene_55062_blast_out | uniq | wc -l 
