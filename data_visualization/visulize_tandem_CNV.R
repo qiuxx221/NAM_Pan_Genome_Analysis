@@ -77,3 +77,11 @@ tanden_cnv <- whole_set +
     ymax = 7500
   ) 
 tanden_cnv + theme(text = element_text(size = 14))
+
+# check tandem by type
+tandem_type <- read.csv("tandem_type_stats.csv")
+table(tandem_type$Tandem)
+#   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20 
+#6556 2743 1411  925  556  424  348  274  205  214  147  119  125  108   85   73   79   80   65   77 
+#  21   22   23   24   25   26 
+#  80   88  119  125  271  970 
