@@ -1,3 +1,57 @@
+# R script to extract files with gene pan_gene ID
+# change gene ID into pan gene ID (this step was done in excel)
+
+setwd("~/Desktop/pan_genome_nov 2/QC_set/bootstrap/")
+
+pan_figure <- read.csv("fina_pan_matrix_for_visualization.csv",header = TRUE,stringsAsFactors=FALSE)
+pan_figure2<- sapply(pan_figure[,-1], function(x) {ind <- which(x!="NA"); x[ind] = pan_figure[ind,1]; return(x)})
+
+
+
+# output gene list for each name genome in R 
+
+setwd("~/Desktop/pan_genome_nov 2/QC_set/bootstrap/ID")
+
+col_names <- colnames(pan_figure2)
+for (i in 1 : ncol(pan_figure2)) {
+  nam_pan_gene_id <- as.matrix(pan_figure2[,i])
+  write.csv(nam_pan_gene_id, file = paste(col_names[i], "_pan_id.csv", sep = ""))
+}
+write.csv(pan_figure2, file = "pan_gene_names.csv")
+
+# commands below were done in Unix to prepare list of genes used for bootstrapping
+for i in *.csv ; do
+cut -d ',' -f 2 "$i"  | sed 's/"//g' | grep -v pan_all | grep -v V1 > $(basename "$i")_rename_list.txt
+done 
+
+# bootstrap method 
+for k in {1..10}; do for j in {1..100}; do for i in `ls *list.txt|shuf`; do cat $i >> temp.$j.$k; sort -u temp.$j.$k|wc -l; done |bash /home/hirschc1/qiuxx221/nam_pan_genome/bootstrap/transpose.sh - > result.$j.$k; rm temp.$j.$k; done & done
+
+
+# transpose.sh
+awk '
+{ 
+    for (i=1; i<=NF; i++)  {
+        a[NR,i] = $i
+    }
+}
+NF>p { p = NF }
+END {    
+    for(j=1; j<=p; j++) {
+        str=a[1,j]
+        for(i=2; i<=NR; i++){
+            str=str" "a[i,j];
+        }
+        print str
+    }
+}'
+
+
+
+
+
+# bootstrap figure visualization 
+
 library(ggplot2)
 library(scales)
 library(gridExtra)
