@@ -1,7 +1,7 @@
 import pandas as pd
 # getting a list of pan gene that has NA in the matrix 
 # information include pan gene ID, genome it is coming from, and genome where it was missing
-infile = '/Users/yinjieqiu/Desktop/NAM_pan_genome_final/909090/pan_matrix_tandem_sub.csv'
+infile = 'tandem_matrix.csv'
 pan_matrix = open(infile, "r")
 
 # get header info
@@ -29,6 +29,6 @@ for line in pan_matrix:
 #print(*tandem_list,)
 
 
-with open('/Users/yinjieqiu/Desktop/NAM_pan_genome_final/909090/Tamden_variation/Tandem_list_all_recode.txt', 'w') as f:
+with open('Tandem_list_by_type.txt', 'w') as f:
     for item in tandem_list:
         f.write("%s\n" % item)
