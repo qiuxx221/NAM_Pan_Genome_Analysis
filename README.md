@@ -155,7 +155,7 @@ This script changed coordinates back to NAM gene ID, if the mapping coverage cov
 The final output format will be 
 Pan_gene_ID NAM gene coordiates(either gmap_ID=xxx or Zm00xxxx)
 ```
-15. convert output from step 14 using R script rejoin_matrix.R
+15. convert output from step 14 using R script rejoin_matrix.R, but this is modified version that only allow to merge the pan gene ID. there is no compression for any possible duplicate gene IDs. They are removed manually when all the gene ID are identical
 ```
 This step generate the final matrix for the pan genome that includes NA genes been recovered using gmap approach
 ```
