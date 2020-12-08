@@ -43,12 +43,13 @@ tanden_gene_type_CNV_range_matrix <- as.data.frame(cbind(matrix_for_copy_count,c
 
 tanden_gene_type_CNV_range_matrix$spread <- tanden_gene_type_CNV_range_matrix$Max_copy-tanden_gene_type_CNV_range_matrix$Min_copy
 table(tanden_gene_type_CNV_range_matrix$spread)
-as.data.frame(table(tanden_gene_type_CNV_range_matrix$spread))
 
+write.csv(tanden_gene_type_CNV_range_matrix,file = "tanden_gene_type_CNV_range_matrix.csv")
+as.data.frame(table(tanden_gene_type_CNV_range_matrix$spread))
+write.csv()
 mean(tanden_gene_type_CNV_range_matrix$spread)
 # 1.875761
 std.error(tanden_gene_type_CNV_range_matrix$spread)
-# 0.01466818
 
 # whole set 
 table(tanden_gene_type_CNV_range_matrix$spread)
@@ -78,28 +79,8 @@ tanden_cnv <- whole_set +
   ) 
 tanden_cnv + theme(text = element_text(size = 14))
 
-# check tandem by type
-library(plotrix)
-library(tidyr)
-library(matrixStats)
-setwd("~/Desktop/pan_genome_nov 2/QC_set/tandem_QC/")
 
-tandem_list_type <- read.csv("Tandem_list_by_type.txt",sep = "\t",header=FALSE)
-colnames(tandem_list_type) <- c("Query_gene","NAM_genome","Tandem")
-head(tandem_list_type)
-#reshape the dataset 
-
-NAM_base_type <- subset(tandem_list_type,tandem_list_type$NAM_genome != "pan_gene" & tandem_list_type$NAM_genome !="Query_gene" )
-#fill_info[rowSums(tandem_list=="")!=ncol(tandem_list), ]
-reshaped_datafram <- pivot_wider(NAM_base_type, names_from = NAM_genome, values_from = Tandem)
-
-# occorance 
-type_frequency <- t(apply(reshaped_datafram, 1, function(u) table(factor(u, levels=c("Single","Tandem","Absence")))))
-tandem_type_stats <- cbind(reshaped_datafram,type_frequency)
-
-write.csv(tandem_type_stats, file = "tandem_type_stats.csv")
-
-
+# count tandem specific to a genome
 tandem_type <- read.csv("tandem_type_stats.csv")
 table(tandem_type$Tandem)
 #   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20 
