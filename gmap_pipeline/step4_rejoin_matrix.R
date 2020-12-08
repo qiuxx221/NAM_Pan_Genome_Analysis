@@ -1,11 +1,12 @@
-fill_info <- read.csv("final_list_for_merge_90.txt",sep = "\t",header=FALSE)
+setwd("~/Desktop/pan_genome_nov/")
+fill_info <- read.csv("CDS_canonical.txt",sep = "\t",header=FALSE)
 colnames(fill_info) <- c("Query_gene","NAM_genome","Gmap_coordinate")
 
 #reshape the dataset 
 library(tidyr)
 fill_info[rowSums(fill_info=="")!=ncol(fill_info), ]
 reshaped_datafram <- pivot_wider(fill_info, names_from = NAM_genome, values_from = Gmap_coordinate)
-write.csv(reshaped_datafram, file= "reshaped_matrix.csv")
+write.csv(reshaped_datafram, file= "reshaped_matrix_final.csv")
 
 # reorder column name before joint the dataset 
 matrix_for_merge = subset(reshaped_datafram, select = c(Query_gene,B73,Tzi8,Ky21,M162W,Ms71,Oh7B,Oh43,M37W,Mo18W,NC350,HP301,Il14H,P39,CML52,CML69,Ki11,CML228,CML247,CML277,CML322,CML333,Ki3,CML103,Tx303,NC358,B97))
@@ -15,12 +16,12 @@ pan_26_matrix <- read.csv("pan26_all.collapsed.csv")
 pan_26_for_merge = subset(pan_26_matrix, select = c(Query_gene,B73,Tzi8,Ky21,M162W,Ms71,Oh7B,Oh43,M37W,Mo18W,NC350,HP301,Il14H,P39,CML52,CML69,Ki11,CML228,CML247,CML277,CML322,CML333,Ki3,CML103,Tx303,NC358,B97))
 
 merged <- rbind(pan_26_for_merge,matrix_for_merge)
-write.csv(merged,file="gmap_join_matrix.csv")
+write.csv(merged,file="gmap_join_matrix_final.csv")
 # load libraries
 library(data.table)
 
 
-dup.matrix.file <- "gmap_join_matrix.csv"
+dup.matrix.file <- "gmap_join_matrix_final.csv"
 
 # load libraries
 library(data.table)
@@ -30,7 +31,7 @@ dup.matrix <- fread(dup.matrix.file, header = TRUE, data.table = FALSE, colClass
 # load matrix
 
 # identify duplicated IDs for each parent, and update the matrix
-for (curr.parent in 1:NCOL(dup.matrix)) {
+for (curr.parent in 1:2) {
   
   # first get a list of IDs
   ID.list <- sapply(dup.matrix[, curr.parent], function(id) {
@@ -85,5 +86,5 @@ for (curr.parent in 1:NCOL(dup.matrix)) {
 }
 
 # write file
-outfile.name <- gsub(".csv", ".gmap_collapsed.csv", dup.matrix.file)
+outfile.name <- gsub(".csv", ".gmap_no_compression_final.csv", dup.matrix.file)
 fwrite(dup.matrix, file = outfile.name, sep = ",", row.names = FALSE, col.names = FALSE, na = "NA", quote = FALSE)
