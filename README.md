@@ -140,13 +140,7 @@ pan_gene_ID NAM gmap_ID= genome coordinate
 #an gff format output was also generated to intersect with existing gene model using this script 
 ```
 
-13. intersecting gmap gene model with NAM annotation to recover potential missed genes
-```
-# a master gff file was made for all NAM annotation
-
-module load bedtools 
-intersectBed -a gmap_cutoff_90.gff -b /home/hirschc1/qiuxx221/nam_pan_genome/NAM_annotation/canonical_gff/master_gff_for_intersect.gff -F 0.9 -wa -wb > intersect_master_90.gff 
-```
+13. When the gmap CDS is larger than 200 bp and it can be intersected with NAM annotation gff CDS, the gmap coordinates were changed back to the gene name.
 
 14. the intersected gff files was further filtered using script intersect_gene_model_name_changing.py
 ```
