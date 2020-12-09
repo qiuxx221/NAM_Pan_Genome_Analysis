@@ -142,6 +142,10 @@ pan_gene_ID NAM gmap_ID= genome coordinate
 
 13. When the gmap CDS is larger than 200 bp and it can be intersected with NAM annotation gff CDS, the gmap coordinates were changed back to the gene name.
 
+```
+Refer to step two in gmap_pipeline section
+```
+
 14. the intersected gff files was further filtered using script intersect_gene_model_name_changing.py
 ```
 This script changed coordinates back to NAM gene ID, if the mapping coverage covered at least 90% of the gene model
@@ -151,7 +155,7 @@ Pan_gene_ID NAM gene coordiates(either gmap_ID=xxx or Zm00xxxx)
 ```
 15. convert output from step 14 using R script rejoin_matrix.R, but this is modified version that only allow to merge the pan gene ID. there is no compression for any possible duplicate gene IDs. They are removed manually when all the gene ID are identical
 ```
-This step generate the final matrix for the pan genome that includes NA genes been recovered using gmap approach
+This step generate the final matrix for the pan genome that includes NA genes been recovered using gmap approach. A list of manually removed pan genes can be find in data visualization under duplicated_lines_manually_removed.csv file
 ```
 
 
