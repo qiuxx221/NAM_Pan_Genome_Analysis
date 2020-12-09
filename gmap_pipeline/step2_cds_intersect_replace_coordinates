@@ -66,7 +66,7 @@ sed -i 's/_P0/_T0/g' model_list_to_filter.txt
 # 230548 lines
 
 
-grep -Fwf ~/nam_pan_genome/NAM_annotation/canonical_transcript/all_canonical_transcript.txt model_list_to_filter.txt
+grep -Fwf ~/nam_pan_genome/NAM_annotation/canonical_transcript/all_canonical_transcript.txt model_list_to_filter.txt > canonical_model_gmap.txt
 
 # 177249 lines are the canonical sequences  
 
