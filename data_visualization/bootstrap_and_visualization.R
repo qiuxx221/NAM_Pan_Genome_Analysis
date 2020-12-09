@@ -3,7 +3,7 @@
 
 setwd("~/Desktop/pan_genome_nov 2/QC_set/bootstrap/")
 
-pan_figure <- read.csv("fina_pan_matrix_for_visualization.csv",header = TRUE,stringsAsFactors=FALSE)
+pan_figure <- read.csv("final_pan_matrix_for_visualization.csv",header = TRUE,stringsAsFactors=FALSE)
 pan_figure2<- sapply(pan_figure[,-1], function(x) {ind <- which(x!="NA"); x[ind] = pan_figure[ind,1]; return(x)})
 
 
