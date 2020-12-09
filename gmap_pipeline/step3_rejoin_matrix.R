@@ -10,6 +10,7 @@ write.csv(reshaped_datafram, file= "reshaped_matrix_final.csv")
 
 # reorder column name before joint the dataset 
 matrix_for_merge = subset(reshaped_datafram, select = c(Query_gene,B73,Tzi8,Ky21,M162W,Ms71,Oh7B,Oh43,M37W,Mo18W,NC350,HP301,Il14H,P39,CML52,CML69,Ki11,CML228,CML247,CML277,CML322,CML333,Ki3,CML103,Tx303,NC358,B97))
+write.csv(matrix_for_merge,file = "~/Desktop/pan_genome_nov 2/ordered_NA_fill_matrix.csv")
 
 # read existing matrix 
 pan_26_matrix <- read.csv("pan26_all.collapsed.csv")
