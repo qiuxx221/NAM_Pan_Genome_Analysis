@@ -158,4 +158,7 @@ Pan_gene_ID NAM gene coordiates(either gmap_ID=xxx or Zm00xxxx)
 This step generate the final matrix for the pan genome that includes NA genes been recovered using gmap approach. A list of manually removed pan genes can be find in data visualization under duplicated_lines_manually_removed.csv file
 ```
 
-
+16. Note on subgenome information
+```
+When one pan gene has more than 1 hits with different subgenome outcome, the majority subgenome genome is kept. For example, when pan gene A has 2 hits to M1, 1 hit to M2, M1 is considered as the subgenome where the pan gene is coming from. When M1, and M2 has the same hit, M1 is kept. Only 42 pan gene has this issue. The details of the conflicting subgenome information can be found at subgenome_conflict_select.csv
+```
