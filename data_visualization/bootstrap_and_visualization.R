@@ -51,6 +51,7 @@ END {
 
 
 # bootstrap figure visualization 
+# bootstrap figure visualization 
 
 library(ggplot2)
 library(scales)
@@ -62,7 +63,7 @@ library(reshape2)
 library(ggsci)
 # prepare dataset 
 # bootstrap_stepwise
-setwd("~/Desktop/pan_genome_nov 2/QC_set/bootstrap/")
+setwd("~/Desktop/NAM_PAN_GENOME/pan_genome_nov 2/QC_set/bootstrap/")
 
 # Panel A Pan Gene 
 ##  use pan_gene_bs_plot_pcnt for figure grabbing 
@@ -89,11 +90,11 @@ pan_gene_bs_plot_pcnt = ggplot(pan_gene_bs, aes(x=Genome, y=count)) +
   labs(x ="Number of Genomes", y = "Number of Pan Genes")  + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black")) +
-  theme(axis.title.y = element_text(size=12),
-        axis.title.x = element_text(size=12),
-        axis.text.y = element_text(size=12), 
-        axis.text.x = element_text(size=12),
-        legend.text = element_text(size=12),
+  theme(axis.title.y = element_text(size=14),
+        axis.title.x = element_text(size=14),
+        axis.text.y = element_text(size=14), 
+        axis.text.x = element_text(size=14,angle = 90),
+        legend.text = element_text(size=14),
         legend.title=element_blank())
 
 require(scales)
