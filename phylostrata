@@ -1,0 +1,12 @@
+# this file will be used for left joint using query genome name
+
+cut -d ',' -f 2,31 pan_matrix_with_subgenome.csv | sed 's/"//g' > pan_gene_id_with_class.txt
+
+# this file will be used to extract phylostrata info 
+
+cut -d ',' -f 2 pan_matrix_with_subgenome.csv | sed 's/"//g' > pan_gene_id.txt
+
+grep -Fwf pan_gene_id.txt nam.evidence_abinitio.age.txt | cut -f 2,3, 4 > phylo_info.txt
+
+# the rest will be done in R via left join
+
