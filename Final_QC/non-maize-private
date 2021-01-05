@@ -1,0 +1,121 @@
+# this is to test if the non-maize private will be private by taking in more publicly availble genomes 
+
+
+# Mo17 
+/home/hirschc1/pmonnaha/references/Mo17_chr1-10.fasta
+
+# PH207
+/home/hirschc1/pmonnaha/references/PH207_chr1-10.fasta
+
+# PHB47
+
+/home/hirschc1/pmonnaha/references/PHB47_chr1-10.fasta
+
+# W22 
+/home/hirschc1/pmonnaha/references/W22_chr1-10.fasta
+
+
+declare -a FASTA=("/panfs/roc/groups/6/maize/shared/databases/genomes/Zea_mays/B73_NAMassembly/Zm-B73-REFERENCE-NAM-5.0/Zm-B73-REFERENCE-NAM-5.0.fasta"
+                  "/home/hirschc1/pmonnaha/references/Mo17_chr1-10.fasta"
+                  "/home/hirschc1/pmonnaha/references/PH207_chr1-10.fasta"
+                  "/home/hirschc1/pmonnaha/references/PHB47_chr1-10.fasta"
+                  "/home/hirschc1/pmonnaha/references/W22_chr1-10.fasta")
+
+
+
+
+declare -a QUERY=("B73"
+                  "Mo17"
+                  "PH207"
+                  "PHB47"
+                  "W22")
+
+for j in {0..4}; do
+    for i in {0..4}; do
+      if [ "$i" -ne "$j" ]; then
+        (echo nucmer --mum -c 1000 -p ${QUERY[$j]}_${QUERY[$i]}_c250 ${FASTA[$j]} ${FASTA[$i]})
+      fi
+    done
+done
+
+# shell script to submit the job 
+
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=20
+#SBATCH --mem=100gb
+#SBATCH -t 32:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=qiuxx221@umn.edu
+
+cd /home/hirschc1/qiuxx221/nam_pan_genome/phylo/non_maize_private
+
+module load parallel
+module load mummer/4.0.0.beta2
+
+parallel --tmpdir /home/hirschc1/qiuxx221/temp/ --compress -j 20 < mummer_cmds.txt
+
+
+
+
+# gmap those pan gene fasta file to each genomes 
+
+perl -ne 'if(/^>(\S+)/){$c=$i{$1}}$c?print:chomp;$i{$_}=1 if @ARGV' non_maize_private_gene_id.txt /home/hirschc1/qiuxx221/nam_pan_genome/NAM_annotation/canonical_fasta/master_26.fasta >  non_maize_private.fasta
+
+# making gmap db for the four genomes 
+
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=40gb
+#SBATCH -t 8:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=qiuxx221@umn.edu
+
+module load gmap
+cd /home/hirschc1/qiuxx221/nam_pan_genome/phylo/gmap_db
+parallel --tmpdir /home/hirschc1/qiuxx221/temp/ --compress -j 4 < gmap_db_cmd.txt
+
+
+
+gmap_build -D /home/hirschc1/qiuxx221/nam_pan_genome/gmap_db -d Mo17 /home/hirschc1/pmonnaha/references/Mo17_chr1-10.fasta
+
+gmap_build -D /home/hirschc1/qiuxx221/nam_pan_genome/gmap_db -d W22 /home/hirschc1/pmonnaha/references/W22_chr1-10.fasta
+
+gmap_build -D /home/hirschc1/qiuxx221/nam_pan_genome/gmap_db -d PH207 /home/hirschc1/pmonnaha/references/PH207_chr1-10.fasta
+
+gmap_build -D /home/hirschc1/qiuxx221/nam_pan_genome/gmap_db -d PHB47 /home/hirschc1/pmonnaha/references/PHB47_chr1-10.fasta
+
+# mapping fasta to four genomes above
+
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=40gb
+#SBATCH -t 8:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=qiuxx221@umn.edu
+
+module load gmap
+cd ~/nam_pan_genome/phylo/gmap_gff/
+
+module load parallel
+
+parallel --tmpdir /home/hirschc1/qiuxx221/temp/ --compress -j 4 < gmap_non_maize_cmd.txt
+
+# cmd is below 
+gmap -D /home/hirschc1/qiuxx221/nam_pan_genome/gmap_db -d Mo17 -n 1 -f gff3_gene non_maize_private.fasta >  ~/nam_pan_genome/phylo/gmap_gff/non_maize_Mo17_1_path.gff3
+
+gmap -D /home/hirschc1/qiuxx221/nam_pan_genome/gmap_db -d W22 -n 1 -f gff3_gene non_maize_private.fasta >  ~/nam_pan_genome/phylo/gmap_gff/non_maize_W22_1_path.gff3
+
+gmap -D /home/hirschc1/qiuxx221/nam_pan_genome/gmap_db -d PH207 -n 1 -f gff3_gene non_maize_private.fasta >  ~/nam_pan_genome/phylo/gmap_gff/non_maize_PH207_1_path.gff3
+
+gmap -D /home/hirschc1/qiuxx221/nam_pan_genome/gmap_db -d PHB47 -n 1 -f gff3_gene non_maize_private.fasta >  ~/nam_pan_genome/phylo/gmap_gff/non_maize_PHB47_1_path.gff3
+
+
+
+
+
