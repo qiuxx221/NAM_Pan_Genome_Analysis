@@ -1,0 +1,62 @@
+# bootstraping 
+march_pan_matrix <- read.csv(file = "~/Desktop/Pan_genome_follow_up/2021_March_Pan_matrix_update/pan_gene_matrix_march_v3_all_info.csv",header = TRUE,stringsAsFactors=FALSE)
+
+# replace the gene ID using pan gene ID to speed up the bootstrapping 
+pan_gene_id_df <- sapply(march_pan_matrix[,-1], function(x) {ind <- which(x!="NA"); x[ind] = march_pan_matrix[ind,1]; return(x)})
+
+
+# bootstrap for all 26 genomes 
+all_26_genomes <- pan_gene_id_df[,3:28]
+setwd("~/Desktop/Pan_genome_follow_up/bootstrap/26_genomes/")
+col_names <- colnames(all_26_genomes)
+for (i in 1 : ncol(all_26_genomes)) {
+  nam_pan_gene_id <- as.matrix(all_26_genomes[,i])
+  write.csv(nam_pan_gene_id, file = paste(col_names[i], "_pan_id.csv", sep = ""))
+}
+
+
+# bootstrap for B73 B97 Ky21 M162W Ms71 Oh43 and Oh7B
+B73_temperate = as.data.frame(all_26_genomes) %>% select("B73","B97", "Ky21", "M162W", "Ms71", "Oh43","Oh7B")
+# remove pan genes that are present in non of the 7 genomes 
+B73_temperate$genome_presence <- 7 - apply(B73_temperate, 1, function(x) sum(is.na(x)))
+B73_temperate_pan_matrix =B73_temperate %>% filter(genome_presence >0) 
+# there is 75,156 pan genes for these 7 lines 
+
+setwd("~/Desktop/Pan_genome_follow_up/bootstrap/7_temperate/")
+col_names <- colnames(B73_temperate_pan_matrix)
+for (i in 1 : ncol(B73_temperate_pan_matrix)) {
+  nam_pan_gene_id <- as.matrix(B73_temperate_pan_matrix[,i])
+  write.csv(nam_pan_gene_id, file = paste(col_names[i], "_temperate_pan_id.csv", sep = ""))
+}
+
+
+# bootstrap for B73 CML52 CML69 CML103 CML228 CML247 CML277 CML322 CML333 Ki3 Ki11 NC350 NC358, and Tzi8
+B73_tropical = as.data.frame(all_26_genomes) %>% select("B73","CML52", "CML69", "CML103", "CML228", "CML247","CML277","CML322","CML333","Ki3","Ki11","NC350","NC358","Tzi8")
+# remove pan genes that are present in non of the 7 genomes 
+B73_tropical$genome_presence <- 14 - apply(B73_tropical, 1, function(x) sum(is.na(x)))
+B73_tropical_pan_matrix =B73_tropical %>% filter(genome_presence >0) 
+# there is 88089 pan genes for these 14 lines 
+
+setwd("~/Desktop/Pan_genome_follow_up/bootstrap/14_tropical/")
+col_names <- colnames(B73_tropical_pan_matrix)
+for (i in 1 : ncol(B73_tropical_pan_matrix)) {
+  nam_pan_gene_id <- as.matrix(B73_tropical_pan_matrix[,i])
+  write.csv(nam_pan_gene_id, file = paste(col_names[i], "_temperate_pan_id.csv", sep = ""))
+}
+
+
+######
+# in unix bootstrapping: 
+
+# Gene list were proccessed and bootstrapped in unix 
+for i in *.csv ; do
+  cut -d ',' -f 2 "$i"  | sed 's/"//g' | grep  pan_gene | grep -v V1 > $(basename "$i")_bootstrap_list.txt
+done 
+
+
+# bootstrap method 
+for k in {1..10}; do for j in {1..100}; do for i in `ls *list.txt|shuf`; do cat $i >> temp.$j.$k; sort -u temp.$j.$k|wc -l; done |bash /home/hirschc1/qiuxx221/nam_pan_genome/bootstrap/transpose.sh - > result.$j.$k; rm temp.$j.$k; done & done
+
+
+
+
